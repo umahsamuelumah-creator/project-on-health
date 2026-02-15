@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NL Health Test Services — Staff (100) Global & Balanced</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --muted:#a9b5ff;
+      --text:#eef1ff;
+      --accent:#6ee7ff;
+      --line:rgba(255,255,255,.10);
+
+      --ok-bg: rgba(61,220,151,.16);
+      --ok-bd: rgba(61,220,151,.35);
+      --ok-tx: #bff7df;
+
+      --soon-bg: rgba(255, 204, 102, .22);
+      --soon-bd: rgba(255, 204, 102, .45);
+      --soon-tx: #ffe8b6;
+
+      --exp-bg: rgba(255, 107, 107, .20);
+      --exp-bd: rgba(255, 107, 107, .45);
+      --exp-tx: #ffd0d0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(110,231,255,.18), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(169,181,255,.16), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    header{padding:26px 18px 10px;max-width:1300px;margin:0 auto}
+    h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:13px;line-height:1.45}
+    .wrap{max-width:1300px;margin:0 auto;padding:14px 18px 40px}
+    .grid{display:grid;gap:12px;grid-template-columns:repeat(12,1fr);margin-bottom:12px}
+    .card{
+      background:rgba(17,26,51,.88);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      padding:14px;
+    }
+    .stat{grid-column:span 3}
+    @media (max-width:980px){.stat{grid-column:span 6}}
+    @media (max-width:520px){.stat{grid-column:span 12}}
+    .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+    .value{font-size:22px;font-weight:800}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      background:rgba(255,255,255,.04);
+      margin:6px 6px 0 0;
+      color:var(--text);
+      white-space:nowrap;
+    }
+    .dot{width:8px;height:8px;border-radius:50%}
+    .dot.ok{background:#3ddc97}
+    .dot.soon{background:#ffcc66}
+    .dot.exp{background:#ff6b6b}
+
+    .controls{grid-column:span 12;display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+    .control{flex:1;min-width:220px}
+    input, select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    input::placeholder{color:rgba(238,241,255,.55)}
+    .btnbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    button{
+      cursor:pointer;border:none;border-radius:12px;
+      padding:10px 12px;
+      background:linear-gradient(135deg, rgba(110,231,255,.95), rgba(169,181,255,.95));
+      color:#081027;font-weight:800;
+    }
+    button.secondary{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      border:1px solid var(--line);
+      font-weight:650;
+    }
+
+    .tablewrap{overflow:auto;border-radius:16px}
+    table{
+      width:100%;
+      border-collapse:separate;border-spacing:0;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    thead th{
+      position:sticky;top:0;z-index:2;
+      background:rgba(7,12,26,.85);
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--line);
+      font-size:12px;text-transform:uppercase;letter-spacing:.11em;
+      color:var(--muted);
+      padding:10px 10px;text-align:left;
+      white-space:nowrap;
+    }
+    tbody td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      font-size:13px;color:rgba(238,241,255,.92);
+      vertical-align:top;
+      white-space:nowrap;
+    }
+    tbody tr:hover td{background:rgba(255,255,255,.03)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    a{color:var(--accent);text-decoration:none}
+
+    .certCell{
+      border-radius:10px;
+      padding:6px 8px;
+      border:1px solid transparent;
+      display:inline-block;
+      min-width:140px;
+    }
+    .cert-ok{background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok-tx)}
+    .cert-soon{background:var(--soon-bg);border-color:var(--soon-bd);color:var(--soon-tx)}
+    .cert-exp{background:var(--exp-bg);border-color:var(--exp-bd);color:var(--exp-tx)}
+    .small{color:rgba(238,241,255,.65);font-size:12px}
+    .footer{margin-top:10px;color:rgba(238,241,255,.55);font-size:12px;line-height:1.4}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NL Health Test Services — Staff Roster (100)</h1>
+    <div class="sub">
+      Single-file HTML. Includes: global distribution, gender balance, staff IDs formatted as <span class="mono">SNL-00001-AZ</span>,
+      employment dates, training due dates, and certification color status (Expired = red, Soon = yellow, Valid = green).
+      Emails follow: <span class="mono">surname.firstname@NLhealthtestservices.ca</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+      <div class="card stat">
+        <div class="label">Total Staff</div>
+        <div class="value" id="statTotal">100</div>
+        <div class="pill"><span class="dot ok"></span><span>Global distribution</span></div>
+        <div class="pill"><span class="dot ok"></span><span>Gender balanced</span></div>
+      </div>
+
+      <div class="card stat">
+        <div class="label">Certification Status</div>
+        <div class="value"><span id="statValid">—</span> <span class="small">Valid</span></div>
+        <div class="pill"><span class="dot soon"></span><span><span id="statSoon">—</span>&nbsp;Soon</span></div>
+        <div class="pill"><span class="dot exp"></span><span><span id="statExpired">—</span>&nbsp;Expired</span></div>
+      </div>
+
+      <div class="card stat">
+        <div class="label">Quick Actions</div>
+        <div class="btnbar">
+          <button class="secondary" id="btnReset">Reset Filters</button>
+          <button id="btnDownload">Download HTML</button>
+        </div>
+        <div class="footer">Download saves the current page state as an HTML file.</div>
+      </div>
+
+      <div class="card stat">
+        <div class="label">Legend</div>
+        <div class="pill"><span class="dot exp"></span><span>Expired (Red)</span></div>
+        <div class="pill"><span class="dot soon"></span><span>Expiring Soon (Yellow)</span></div>
+        <div class="pill"><span class="dot ok"></span><span>Valid (Green)</span></div>
+        <div class="footer small">“Soon” = within 60 days.</div>
+      </div>
+
+      <div class="card controls">
+        <div class="control">
+          <div class="label">Search (Name / ID / Email / Role / Country)</div>
+          <input id="q" placeholder="e.g., SNL-00012-AB or Sterilization or Ghana" />
+        </div>
+        <div class="control">
+          <div class="label">Country</div>
+          <select id="country"><option value="">All</option></select>
+        </div>
+        <div class="control">
+          <div class="label">Gender</div>
+          <select id="gender">
+            <option value="">All</option>
+            <option>Female</option>
+            <option>Male</option>
+          </select>
+        </div>
+        <div class="control">
+          <div class="label">Role</div>
+          <select id="role"><option value="">All</option></select>
+        </div>
+        <div class="control">
+          <div class="label">Certification Status</div>
+          <select id="status">
+            <option value="">All</option>
+            <option value="valid">Valid</option>
+            <option value="soon">Expiring Soon</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">Staff List</div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Staff ID</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Country</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Date Employed</th>
+              <th>Training Due</th>
+              <th>Cert 1</th>
+              <th>Cert 2</th>
+              <th>Cert 3</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="footer" id="footerNote"></div>
+    </div>
+  </div>
+
+  <script>
+    // All dates are generated relative to "today" in the viewer’s browser.
+    // Certification status coloring:
+    // - expired: expiry < today (red)
+    // - soon:    expiry within 60 days (yellow)
+    // - valid:   expiry beyond 60 days (green)
+
+    const DOMAIN = "NLhealthtestservices.ca";
+
+    const countries = [
+      "Canada","United States","United Kingdom","Ireland","Nigeria","Ghana","Kenya","South Africa",
+      "India","Pakistan","Bangladesh","Philippines","Malaysia","Singapore","Australia","New Zealand",
+      "Brazil","Mexico","Argentina","Chile","France","Germany","Netherlands","Sweden",
+      "Italy","Spain","Poland","Turkey","UAE","Saudi Arabia",
+      "Japan","South Korea","China","Vietnam","Thailand","Indonesia",
+      "Egypt","Morocco","Tunisia","Ethiopia",
+      "Jamaica","Trinidad and Tobago","Barbados","Dominican Republic",
+      "Colombia","Peru","Ecuador","Uruguay","Bolivia","Portugal",
+      "Norway","Denmark","Finland","Switzerland","Austria","Belgium",
+      "Qatar","Oman","Jordan","Israel","Greece","Czechia",
+      "Romania","Hungary","Bulgaria","Croatia","Slovenia","Slovakia",
+      "Lithuania","Latvia","Estonia","Ukraine","Georgia","Armenia",
+      "Kazakhstan","Sri Lanka","Nepal","Myanmar","Cambodia","Laos",
+      "Taiwan","Hong Kong","Mongolia","Chile (North)","Sudan","Tanzania",
+      "Uganda","Rwanda","Zambia","Zimbabwe"
+    ];
+
+    const roles = [
+      { name: "Environmental Services", certCount: 2, certs: ["WHMIS", "Infection Prevention & Control"] },
+      { name: "OR Sterilization Tech", certCount: 3, certs: ["OR Sterile Processing", "Infection Prevention & Control", "Chemical Safety"] },
+      { name: "Healthcare Support Worker", certCount: 2, certs: ["Basic Life Support", "Infection Prevention & Control"] },
+      { name: "Porter", certCount: 2, certs: ["WHMIS", "OH&S"] },
+      { name: "Unit Clerk", certCount: 2, certs: ["OH&S", "Infection Prevention & Control"] },
+      { name: "Materials Management", certCount: 2, certs: ["WHMIS", "Chemical Safety"] },
+      { name: "Infection Control Support", certCount: 3, certs: ["Infection Prevention & Control", "OH&S", "Chemical Safety"] },
+      { name: "OR Attendant", certCount: 3, certs: ["Infection Prevention & Control", "OR Sterile Processing", "WHMIS"] },
+      { name: "Housekeeping Supervisor", certCount: 3, certs: ["WHMIS", "Infection Prevention & Control", "OH&S"] },
+      { name: "Safety Coordinator", certCount: 3, certs: ["OH&S", "Chemical Safety", "Infection Prevention & Control"] }
+    ];
+
+    // Name pools (global, varied). 100 will be created by combining.
+    const firstNamesF = [
+      "Amina","Zainab","Fatima","Maryam","Amara","Ada","Chioma","Ifunanya","Sade","Ife",
+      "Maya","Anaya","Priya","Aisha","Noor","Sofia","Isabella","Camila","Valentina","Lucia",
+      "Hannah","Grace","Emily","Chloe","Olivia","Ava","Mia","Lily","Sarah","Nora",
+      "Yuki","Hana","Minseo","Jia","Mei","Xinyi","Trang","Linh","Siti","Nur",
+      "Leila","Nadia","Salma","Iman","Rania","Aaliyah","Khadija","Farah","Aya","Dalia"
+    ];
+    const firstNamesM = [
+      "Samuel","David","Michael","Daniel","James","John","Peter","Paul","Joseph","Emmanuel",
+      "Chinedu","Ibrahim","Omar","Yusuf","Ahmed","Kwame","Kofi","Tunde","Ade","Babatunde",
+      "Arjun","Ravi","Vikram","Imran","Hassan","Ali","Noah","Liam","Ethan","Lucas",
+      "Mateo","Diego","Juan","Carlos","Andres","Gabriel","Kenji","Haruto","Minho","Joon",
+      "Wei","Jian","Huy","An","Putra","Rizky","Sanjay","Naveen","Musa","Said"
+    ];
+    const surnames = [
+      "Okafor","Mensah","Abdullahi","Hassan","Ali","Singh","Patel","Khan","Rahman","Santos",
+      "Garcia","Fernandez","Lopez","Martinez","Gonzalez","Brown","Smith","Johnson","Miller","Wilson",
+      "Taylor","Anderson","Thomas","Jackson","White","Martin","Lee","Kim","Park","Choi",
+      "Nguyen","Tran","Wong","Chen","Zhang","Li","Tan","Lim","Ibrahim","Suleiman",
+      "O'Connor","Murphy","Walsh","Dubois","Moreau","Schmidt","Weber","Rossi","Bianchi","Kowalski"
+    ];
+
+    const genders = Array(50).fill("Female").concat(Array(50).fill("Male"));
+
+    function slugEmail(surname, firstName){
+      const clean = (x)=>x
+        .normalize("NFKD").replace(/[\u0300-\u036f]/g,"")
+        .replace(/[^a-zA-Z'-]/g,"")
+        .replace(/'/g,"")
+        .toLowerCase();
+      return `${clean(surname)}.${clean(firstName)}@${DOMAIN}`;
+    }
+
+    function addDays(date, days){
+      const d = new Date(date.getTime());
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+    function fmt(date){
+      // YYYY-MM-DD
+      const y = date.getFullYear();
+      const m = String(date.getMonth()+1).padStart(2,"0");
+      const d = String(date.getDate()).padStart(2,"0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function certStatus(expiryDate){
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const exp = new Date(expiryDate);
+      exp.setHours(0,0,0,0);
+
+      if(exp < today) return "expired";
+      const soonCutoff = addDays(today, 60);
+      if(exp <= soonCutoff) return "soon";
+      return "valid";
+    }
+
+    function statusClass(st){
+      return st === "expired" ? "cert-exp" : st === "soon" ? "cert-soon" : "cert-ok";
+    }
+    function statusLabel(st){
+      return st === "expired" ? "Expired" : st === "soon" ? "Soon" : "Valid";
+    }
+
+    // Build 100 staff:
+    // - IDs: SNL-00001 + first letter of first name + last letter of surname (example)
+    // - Employment date: random in last ~6 years
+    // - Training due: within next 0-180 days (some overdue by making negative days)
+    // - A few expired certs and some soon-to-expire certs are forced.
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // Force patterns:
+    // - 8 staff with at least one expired cert
+    // - 14 staff with at least one soon cert
+    const FORCE_EXPIRED = new Set([3, 9, 17, 28, 41, 57, 72, 88]); // 1-based indexes
+    const FORCE_SOON    = new Set([5, 6, 12, 19, 24, 33, 36, 44, 50, 63, 69, 75, 83, 95]);
+
+    function pickFirstName(gender, i){
+      if(gender==="Female") return firstNamesF[i % firstNamesF.length];
+      return firstNamesM[i % firstNamesM.length];
+    }
+    function pickSurname(i){
+      return surnames[i % surnames.length];
+    }
+    function pickCountry(i){
+      return countries[i % countries.length];
+    }
+    function pickRole(i){
+      return roles[i % roles.length];
+    }
+
+    function makeStaff(){
+      const out = [];
+      for(let i=0;i<100;i++){
+        const idx = i+1;
+        const gender = genders[i];
+        const firstName = pickFirstName(gender, i*7 + 3);
+        const surname = pickSurname(i*11 + 5);
+        const country = pickCountry(i*13 + 2);
+        const roleObj = pickRole(i*5 + 1);
+
+        const email = slugEmail(surname, firstName);
+
+        const firstLetter = firstName[0].toUpperCase();
+        const lastLetter = surname[surname.length-1].toUpperCase();
+        const staffId = `SNL-${String(idx).padStart(5,"0")}-${firstLetter}${lastLetter}`;
+
+        // Employment date: between 2019-01-01 and today (roughly)
+        const minEmp = new Date(2019,0,1);
+        const span = today.getTime() - minEmp.getTime();
+        const emp = new Date(minEmp.getTime() + (span * ((i*37 % 100) / 100)));
+        emp.setHours(0,0,0,0);
+
+        // Training due: some overdue
+        const dueOffset = ((i*29) % 241) - 30; // -30 .. 210 days
+        const trainingDue = addDays(today, dueOffset);
+
+        // Certifications: 2 or 3 depending on role
+        const certCount = roleObj.certCount;
+        const certs = roleObj.certs.slice(0, certCount);
+
+        // Create expiry dates:
+        // default: valid (120..720 days out)
+        // soon:  1..60 days out
+        // expired: -180..-1 days
+        function genExpiry(kind, salt){
+          if(kind==="expired"){
+            const back = -1 * (1 + ((i*17 + salt) % 180));
+            return fmt(addDays(today, back));
+          }
+          if(kind==="soon"){
+            const ahead = 1 + ((i*19 + salt) % 60);
+            return fmt(addDays(today, ahead));
+          }
+          const ahead = 120 + ((i*23 + salt) % 600);
+          return fmt(addDays(today, ahead));
+        }
+
+        // Assign statuses per staff:
+        // If forced expired -> make cert1 expired
+        // Else if forced soon -> make cert1 soon
+        // Else keep all valid by default, but sprinkle a little variety by making cert2 soon occasionally.
+        const forcedExpired = FORCE_EXPIRED.has(idx);
+        const forcedSoon = FORCE_SOON.has(idx);
+
+        const certRows = [];
+        for(let c=0;c<3;c++){
+          if(c >= certCount){
+            certRows.push(null);
+            continue;
+          }
+          let kind = "valid";
+
+          if(c===0 && forcedExpired) kind = "expired";
+          else if(c===0 && !forcedExpired && forcedSoon) kind = "soon";
+          else if(c===1 && !forcedExpired && !forcedSoon && (idx % 17 === 0)) kind = "soon";
+          else if(c===2 && !forcedExpired && (idx % 29 === 0)) kind = "soon";
+
+          const expiry = genExpiry(kind, c*41+7);
+          certRows.push({
+            name: certs[c],
+            expiry,
+            status: certStatus(expiry)
+          });
+        }
+
+        out.push({
+          staffId,
+          firstName,
+          surname,
+          name: `${firstName} ${surname}`,
+          gender,
+          country,
+          role: roleObj.name,
+          email,
+          employed: fmt(emp),
+          trainingDue: fmt(trainingDue),
+          certs: certRows // [cert1, cert2, cert3 or null]
+        });
+      }
+      return out;
+    }
+
+    const staff = makeStaff();
+
+    // Populate filters
+    const els = {
+      q: document.getElementById("q"),
+      country: document.getElementById("country"),
+      gender: document.getElementById("gender"),
+      role: document.getElementById("role"),
+      status: document.getElementById("status"),
+      tbody: document.getElementById("tbody"),
+      statTotal: document.getElementById("statTotal"),
+      statValid: document.getElementById("statValid"),
+      statSoon: document.getElementById("statSoon"),
+      statExpired: document.getElementById("statExpired"),
+      footerNote: document.getElementById("footerNote"),
+      btnReset: document.getElementById("btnReset"),
+      btnDownload: document.getElementById("btnDownload"),
+    };
+
+    function fillSelect(selectEl, values){
+      const uniq = [...new Set(values)].sort((a,b)=>a.localeCompare(b));
+      uniq.forEach(v=>{
+        const opt = document.createElement("option");
+        opt.value = v; opt.textContent = v;
+        selectEl.appendChild(opt);
+      });
+    }
+    fillSelect(els.country, staff.map(s=>s.country));
+    fillSelect(els.role, staff.map(s=>s.role));
+
+    function bestStatusForStaff(s){
+      // If any cert expired -> expired
+      // else if any cert soon -> soon
+      // else valid
+      const certs = s.certs.filter(Boolean);
+      if(certs.some(c=>c.status==="expired")) return "expired";
+      if(certs.some(c=>c.status==="soon")) return "soon";
+      return "valid";
+    }
+
+    function matches(s){
+      const q = (els.q.value||"").trim().toLowerCase();
+      const country = els.country.value;
+      const gender = els.gender.value;
+      const role = els.role.value;
+      const st = els.status.value;
+
+      if(country && s.country !== country) return false;
+      if(gender && s.gender !== gender) return false;
+      if(role && s.role !== role) return false;
+
+      if(st){
+        const sst = bestStatusForStaff(s);
+        if(sst !== st) return false;
+      }
+
+      if(q){
+        const hay = [
+          s.staffId, s.name, s.email, s.role, s.country, s.gender,
+          s.employed, s.trainingDue,
+          ...s.certs.filter(Boolean).flatMap(c=>[c.name, c.expiry, c.status])
+        ].join(" ").toLowerCase();
+        if(!hay.includes(q)) return false;
+      }
+      return true;
+    }
+
+    function certCell(cert){
+      if(!cert) return `<span class="small">—</span>`;
+      const cls = statusClass(cert.status);
+      return `
+        <span class="certCell ${cls}">
+          <div><strong>${cert.name}</strong></div>
+          <div class="small">Expiry: <span class="mono">${cert.expiry}</span> • ${statusLabel(cert.status)}</div>
+        </span>
+      `;
+    }
+
+    function render(){
+      // Update statuses based on current date (in case the file is opened later)
+      staff.forEach(s=>{
+        s.certs.filter(Boolean).forEach(c=>{
+          c.status = certStatus(c.expiry);
+        });
+      });
+
+      const filtered = staff.filter(matches);
+
+      // Stats (count by certification status per staff)
+      let valid=0, soon=0, expired=0;
+      staff.forEach(s=>{
+        const st = bestStatusForStaff(s);
+        if(st==="valid") valid++;
+        else if(st==="soon") soon++;
+        else expired++;
+      });
+      els.statTotal.textContent = staff.length;
+      els.statValid.textContent = valid;
+      els.statSoon.textContent = soon;
+      els.statExpired.textContent = expired;
+
+      els.tbody.innerHTML = filtered.map(s=>`
+        <tr>
+          <td class="mono">${s.staffId}</td>
+          <td>${s.name}</td>
+          <td>${s.gender}</td>
+          <td>${s.country}</td>
+          <td>${s.role}</td>
+          <td><a href="mailto:${s.email}">${s.email}</a></td>
+          <td class="mono">${s.employed}</td>
+          <td class="mono">${s.trainingDue}</td>
+          <td>${certCell(s.certs[0])}</td>
+          <td>${certCell(s.certs[1])}</td>
+          <td>${certCell(s.certs[2])}</td>
+        </tr>
+      `).join("");
+
+      els.footerNote.textContent = `Showing ${filtered.length} of ${staff.length} staff (filters applied).`;
+    }
+
+    // Events
+    ["input","change"].forEach(evt=>{
+      els.q.addEventListener(evt, render);
+      els.country.addEventListener(evt, render);
+      els.gender.addEventListener(evt, render);
+      els.role.addEventListener(evt, render);
+      els.status.addEventListener(evt, render);
+    });
+
+    els.btnReset.addEventListener("click", () => {
+      els.q.value = "";
+      els.country.value = "";
+      els.gender.value = "";
+      els.role.value = "";
+      els.status.value = "";
+      render();
+    });
+
+    els.btnDownload.addEventListener("click", () => {
+      const blob = new Blob([document.documentElement.outerHTML], {type:"text/html;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "NLHTS_staff_100_export.html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    render();
+  </script>
+</body>
+</html>
